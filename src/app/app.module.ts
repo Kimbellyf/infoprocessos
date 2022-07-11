@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FlowModule } from './flow/flow.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PagesAuthModule } from './pages-auth/pages-auth.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    PagesAuthModule,
     FlowModule,
     ReactiveFormsModule
     

@@ -1,0 +1,11 @@
+<ng-content>
+    <form [formGroup]="form" (ngSubmit)="login()">
+        <input type="text" [formControlName]="loginData.username"/>
+        <div *ngIf="form.get('username').hasError('required')">
+            E-mail é requerido
+        </div>
+        <input type="password" [formControlName]="loginData.password"/>
+        <button type="submit">Submit</button>
+    </form>
+
+</ng-content>
