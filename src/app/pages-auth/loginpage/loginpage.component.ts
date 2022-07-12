@@ -44,26 +44,29 @@ export class LoginpageComponent implements OnInit {
     this.messages =[];
     this.errors = [];
     this.submitted = true;
-    this.authService.login(this.loginForm.value).subscribe(
-      (res: any)=>{
-        console.log(res);
-        this.authService.authenticate(
-          //res.token,
-          '5af8ba4c-43e3-4361-9e9c-f73458ab6a5b',
-          'kim'
-          //this.user.login
-         
-        );
-        console.log(res);
-        this.messages.push("Login efetuado com sucesso!");
-        this.router.navigate(['/flow']);
-      },
-      error =>{
-        console.log(error);
-        this.showError(error.status);
-        this.errors.push("Login inválido");
-        this.submitted = false;
-      });
+    if(this.loginForm && this.loginForm.value){
+      this.authService.login(this.loginForm.value).subscribe(
+        (res: any)=>{
+          console.log(res);
+          this.authService.authenticate(
+            //res.token,
+            '5af8ba4c-43e3-4361-9e9c-f73458ab6a5b',
+            'kim'
+            //this.user.login
+          
+          );
+          console.log(res);
+          this.messages.push("Login efetuado com sucesso!");
+          this.router.navigate(['/flow']);
+        },
+        error =>{
+          console.log(error);
+          this.showError();
+          this.router.navigate(['/flow']);
+          this.errors.push("Login inválido");
+          this.submitted = false;
+        });
+    }
   }
   getConfigValue(key: string): any{
     //return getDeepFromObjec(this.options, key, null);

@@ -35,7 +35,6 @@ import {CardModule} from 'primeng/card';
     CommonModule,
     PagesAuthRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule,
 
     InputTextModule,
 		CheckboxModule,

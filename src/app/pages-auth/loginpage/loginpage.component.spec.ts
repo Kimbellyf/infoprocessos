@@ -7,9 +7,9 @@ import {HttpErrorResponse} from '@angular/common/http';
 describe('LoginpageComponent', () => {
     function setup(){
       const authService = jasmine.createSpyObj('authService',['login']);
-      const router = jasmine.createSpyObj('router',[]);
-      const formBuilder = jasmine.createSpyObj('formBuilder',[]);
-      const messageService = jasmine.createSpyObj('messageService',[]);
+      const router = jasmine.createSpyObj('router',['navigate']);
+      const formBuilder = jasmine.createSpyObj('formBuilder',['group']);
+      const messageService = jasmine.createSpyObj('messageService',['add']);
      
       const component = new LoginpageComponent(
         authService,
@@ -37,6 +37,7 @@ describe('LoginpageComponent', () => {
       } = setup();
   
       it('if sucess', () => {
+        //component.loginForm.setValue({username:'kim@',password:'23445'});
         authService.login.and.returnValue(of({}));
         component.login();
         expect(true).toBe(true);   
@@ -47,6 +48,8 @@ describe('LoginpageComponent', () => {
           status:404,
           error: ''
         });
+
+        //component.loginForm.setValue({username:'kim@',password:'ddsdsdd'});
 
         authService.login.and.returnValue(throwError(() => exampleHttpError))
         component.login();

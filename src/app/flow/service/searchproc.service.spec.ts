@@ -8,7 +8,7 @@ import { SearchprocService } from './searchproc.service';
 describe('SearchprocService', () => {
   function setup(){
     const http = jasmine.createSpyObj('http',['get','post','put','patch']);
-    const router = jasmine.createSpyObj('router',[]);
+    const router = jasmine.createSpyObj('router',['navigate']);
 
     const service = new SearchprocService(
       http,

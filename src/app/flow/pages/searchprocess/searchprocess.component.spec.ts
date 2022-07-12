@@ -7,10 +7,10 @@ import {HttpErrorResponse} from '@angular/common/http';
 describe('SearchprocessComponent', () => {
     function setup(){
       const searchProcService = jasmine.createSpyObj('searchProcService',['searchProcessWithCNJ']);
-      const primengConfig = jasmine.createSpyObj('primengConfig',[]);
-      const customerService = jasmine.createSpyObj('customerService',[]);
-      const formBuilder = jasmine.createSpyObj('formBuilder',[]);
-      const messageService = jasmine.createSpyObj('messageService',[]);
+      const primengConfig = jasmine.createSpyObj('primengConfig',['getTranslation']);
+      const customerService = jasmine.createSpyObj('customerService',['getCustomersLarge']);
+      //const formBuilder = jasmine.createSpyObj('formBuilder',[]);
+      //const messageService = jasmine.createSpyObj('messageService',[]);
 
       const component = new SearchprocessComponent(
         searchProcService,

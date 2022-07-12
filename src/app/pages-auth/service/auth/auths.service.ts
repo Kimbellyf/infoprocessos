@@ -32,17 +32,17 @@ export class AuthsService {
       }}; 
       let url = "https://op.digesto.com.br/user/login";
       //urlDigestoConfig.url_search_process
-      this.http.post(url,credentials).subscribe(
-        (res:any) =>{
-
-          observableProcessCNPJ.next(res);
-        },
-        (error: HttpErrorResponse) =>{
-          observableProcessCNPJ.next(error);
-        },
-        ()=>{
-          observableProcessCNPJ.complete();
-        }
+      this.http.post(url,credentials).subscribe({
+          next: (res) =>{
+            observableProcessCNPJ.next(res);
+          },
+          error: (error: HttpErrorResponse) => {
+            observableProcessCNPJ.next(error);
+          },
+          complete: () => {
+            console.info('complete') ;
+          }
+      }
       )
    })
   };

@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 import { SearchprocessComponent } from './pages/searchprocess/searchprocess.component';
 import { FlowRoutingModule } from './flow-routing.module';
 import {PaginatorModule} from 'primeng/paginator';
-import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 
 import {TableModule} from 'primeng/table';
 import {CalendarModule} from 'primeng/calendar';
@@ -31,8 +30,7 @@ import { CustomerService } from './service/customer.service';
     CommonModule,
     FlowRoutingModule,
     PaginatorModule,
-    BrowserModule,
-    BrowserAnimationsModule,
+    
     TableModule,
     CalendarModule,
 		SliderModule,
@@ -44,7 +42,6 @@ import { CustomerService } from './service/customer.service';
 		ToastModule,
     InputTextModule,
     ProgressBarModule,
-    HttpClientModule,
     FormsModule
     
     
