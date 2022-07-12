@@ -13,7 +13,7 @@ export class AuthguardService implements CanActivate{
     private router: Router
   ) { }
   
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
+  canActivate(): boolean{
    const auth = this.authService.isAuthenticated();
    if(!auth){
      return false;

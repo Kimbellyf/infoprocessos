@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import jwt_decode from "jwt-decode";
 import { Credentials } from '../../models/auth/credentials';
+import { urlDigestoConfig } from 'src/assets/urlDigesto.config';
 
 @Injectable({
   providedIn: 'root'
@@ -22,12 +23,29 @@ export class AuthsService {
     })
   }
 
-  login(credentials: Credentials): Observable<any>{ //Observable<AuthResponse>{
-    const url = '';
-    const options = {headers: this.getAuthHeader()};
-    //return this.http.post<AuthResponse> (url, credentials, options);
-    return this.http.post<any> (url, credentials, options);
-  }
+  login(loginForm:any): Observable<any>{
+    return new Observable(observableProcessCNPJ => {
+      let credentials = {next: '/#undefined',
+      credentials:{
+        username: loginForm.username,
+        password: loginForm.password
+      }}; 
+      let url = "https://op.digesto.com.br/user/login";
+      //urlDigestoConfig.url_search_process
+      this.http.post(url,credentials).subscribe(
+        (res:any) =>{
+
+          observableProcessCNPJ.next(res);
+        },
+        (error: HttpErrorResponse) =>{
+          observableProcessCNPJ.next(error);
+        },
+        ()=>{
+          observableProcessCNPJ.complete();
+        }
+      )
+   })
+  };
   authenticate(token: string, login: string){
     localStorage.setItem("token",token);
     localStorage.setItem("login",login);

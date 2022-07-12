@@ -1,15 +1,18 @@
-import { AuthsService } from './auths.service';
-import {of, throwError} from 'rxjs';
-import {HttpErrorResponse} from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
+import { TestBed } from '@angular/core/testing';
+import { of, throwError } from 'rxjs';
 
-describe('AuthsService', () => {
+import { SearchprocService } from './searchproc.service';
+
+
+describe('SearchprocService', () => {
   function setup(){
     const http = jasmine.createSpyObj('http',['get','post','put','patch']);
     const router = jasmine.createSpyObj('router',[]);
 
-    const service = new AuthsService(
+    const service = new SearchprocService(
       http,
-      router
+     
     );
     return {
       service,
@@ -24,20 +27,16 @@ describe('AuthsService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('login',()=>{
+  describe('searchProcessWithCNPJ',()=>{
     const {
       service,
       http
     } = setup();
 
     it('if sucess', () => {
-      http.post.and.returnValue(of({}));
-      let loginForm ={
-        username: 'kimtestetestes@hotmail.com',
-        password: "12345"
-      }
+      http.get.and.returnValue(of({}));
       expect(()=>{
-        service.login(loginForm).subscribe(
+        service.searchProcessWithCNJ('5001682-88.2020.8.13.0672','8').subscribe(
           {}
         )
       }).not.toThrow();
@@ -48,17 +47,13 @@ describe('AuthsService', () => {
         status:404,
         error: ''
       });
-      let loginForm ={
-        username: 'kimtestetestes@hotmail.com',
-        password: "12345"
-      }
-      http.post.and.returnValue(throwError(() => exampleHttpError))
+      http.get.and.returnValue(throwError(() => exampleHttpError))
       expect(()=>{
-        service.login(loginForm).subscribe(
+        service.searchProcessWithCNJ('500168288.20208.13','8').subscribe(
           {}
         )
       }).not.toThrow();
     });
 
-  });
+  })
 });

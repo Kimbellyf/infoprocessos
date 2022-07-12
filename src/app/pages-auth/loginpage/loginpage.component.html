@@ -1,11 +1,45 @@
-<ng-content>
-    <form [formGroup]="form" (ngSubmit)="login()">
-        <input type="text" [formControlName]="loginData.username"/>
-        <div *ngIf="form.get('username').hasError('required')">
-            E-mail é requerido
-        </div>
-        <input type="password" [formControlName]="loginData.password"/>
-        <button type="submit">Submit</button>
-    </form>
+<div class="grid">
+    <div class="col-12"></div>
+</div>
+<p-toast position="top-left" key="tl"></p-toast>
 
-</ng-content>
+<div class="grid">
+    <div class="col-12 md:col-7 lg:col-4"></div>
+    
+    <div class="col-12 md:col-6 lg:col-4">
+        <p-card  [style]="{width: '360px', 'margin-bottom': '2em'}" styleClass="p-card-shadow">
+            <ng-template pTemplate="header">
+                <div class="titleLogin">
+                   <b>LOGIN</b>
+                </div>
+            </ng-template>
+            <form [formGroup]="loginForm" class="p-fluid mt-5" (ngSubmit)="login()">
+        
+                <fieldset  style="border-style: none;">
+                    <label for="email" class="block">E-mail</label>
+                    <span class="p-input-icon-left my-2">
+                        <i class="pi pi-user"></i>
+                        <input id="email" formControlName="username" type="email" pInputText placeholder="Email" required>
+                    </span>
+                </fieldset>
+                
+        
+                <fieldset class="field" style="border-style: none;">
+                    <label for="password" class="block" required>Senha</label>
+            
+                    <p-password id="password" formControlName="password" [toggleMask]="true" promptLabel="Colocar senha"
+                    [feedback]="false">
+                    </p-password>
+                </fieldset>
+
+                <fieldset style="border-style: none;">
+                    <button pButton type="submit" label="Submit" class="p-button-outlined"
+                     [disabled]="!loginForm.valid"
+                    ></button>
+                </fieldset>
+            </form>
+        </p-card>
+    </div>
+    <div class="col-12 md:col-6 lg:col-3"></div>
+</div>
+
