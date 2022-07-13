@@ -30,8 +30,9 @@ export class AuthsService {
         username: loginForm.username,
         password: loginForm.password
       }}; 
-      let url = "https://op.digesto.com.br/user/login";
-      //urlDigestoConfig.url_search_process
+     // let url = "https://op.digesto.com.br/user/login";
+      //let url = urlDigestoConfig.url_search_process;
+      let url = urlDigestoConfig.url_login;
       this.http.post(url,credentials).subscribe({
           next: (res) =>{
             observableProcessCNPJ.next(res);

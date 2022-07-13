@@ -1,4 +1,32 @@
+
+
 # Infoprocessos
+
+Este projeto foi feito em Angular utilizando e implementando rotas, testes unitários,
+authGuard e o PrimeNg para os designers simples. Para executar o projeto, basta seguir
+os passos a seguir e colocar na linha de comando da pasta do projeto, conforme o que
+necessitar. Para teste localhost, digitar ng serve ou npm start. Projeto ainda não finalizado. 
+
+# Possíveis melhorias e observações
+- Conforme fui criando os componentes e as rotas, notei que poderia ter feito algumas funções e componentes de maneira mais concisa, sem muita repetição e de maneira mais clara. 
+
+- Poderia ter feito mais abstrações para implementações de métodos para aumentar a coesão.
+
+- Tentei diminuir o acoplamento e dependência de outras classes ou componentes.
+- O projeto foi organizado com propósito de Coesão comunicacional/informacional
+Coesão comunicacional é quando partes de um módulo são agrupadas porque operam nos mesmos dados (por exemplo, um módulo que opera no mesmo registro de informações). Mas
+também lógica e processual;
+
+- Com um pouco mais de tempo, organizar melhor as funções, importações etc, além de fazer mais testes unitários e chamar para refresh do token ao invés de guardar no
+projeto.
+
+- Melhorar esteticamente o projeto e consertar o login
+
+
+# Passo 1 para executar o projeto
+
+Clonar o repositório, em sua pasta no cmd colocar npm install e em seguida npm start ou ng serve
+#
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.5.
 

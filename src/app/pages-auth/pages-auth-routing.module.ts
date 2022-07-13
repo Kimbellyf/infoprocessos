@@ -7,15 +7,18 @@ const routes: Routes = [
     //path: '',
     //component: LoginpageComponent,
     //children: [
+
       {
         path: '*',
         redirectTo: 'login',
+       
       },
       {
         path: '',
         component: LoginpageComponent,
         pathMatch: 'full'
-      }
+      }, 
+      
     //],
   //},
 ];

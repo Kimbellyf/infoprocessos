@@ -17,19 +17,26 @@ export class SearchprocService {
   searchProcessWithCNJ(numprocess: string, type: string): Observable<any>{
     return new Observable(observableProcessCNPJ => {
       let credentials = {}; 
-      let urlFull = urlDigestoConfig.url_search_process.replace('{num_process}',numprocess).replace('{typeprocess}',type)
-      this.http.get(urlFull,credentials).subscribe(
-        (res:any) =>{
+      let urlFull =  urlDigestoConfig.url_search_process.replace('{num_process}',numprocess).replace('{typeprocess}',type)
+      this.http.get(urlFull).subscribe({
 
+        next(res:any){
+          if(res && res.status_op){
+            observableProcessCNPJ.error(res);
+            observableProcessCNPJ.complete();
+          }
           observableProcessCNPJ.next(res);
-        },
-        (error: HttpErrorResponse )=>{
-          observableProcessCNPJ.next(error);
-        },
-        ()=>{
           observableProcessCNPJ.complete();
+        },
+        error(error: HttpErrorResponse){
+          //observableProcessCNPJ.next(error);
+          observableProcessCNPJ.error(error);
+          observableProcessCNPJ.complete();
+        },
+        complete: () => {
+          
         }
-      )
-   })
+      })
+    });
   };
 }

@@ -9,13 +9,16 @@ describe('SearchprocessComponent', () => {
       const searchProcService = jasmine.createSpyObj('searchProcService',['searchProcessWithCNJ']);
       const primengConfig = jasmine.createSpyObj('primengConfig',['getTranslation']);
       const customerService = jasmine.createSpyObj('customerService',['getCustomersLarge']);
-      //const formBuilder = jasmine.createSpyObj('formBuilder',[]);
-      //const messageService = jasmine.createSpyObj('messageService',[]);
+      const formBuilder = jasmine.createSpyObj('formBuilder',['group']);
+      const messageService = jasmine.createSpyObj('messageService',['add']);
+     
 
       const component = new SearchprocessComponent(
         searchProcService,
         primengConfig,
-        customerService
+        customerService,
+        formBuilder,
+        messageService
       );
       return {
         component,
@@ -49,7 +52,7 @@ describe('SearchprocessComponent', () => {
         });
 
         searchProcService.searchProcessWithCNJ.and.returnValue(throwError(() => exampleHttpError))
-        component.searchProcessCNJEtc('','');
+        component.searchProcessCNJEtc('2','');
         expect(true).toBe(true);
       });
   

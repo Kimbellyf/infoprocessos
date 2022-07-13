@@ -1,0 +1,137 @@
+<app-menuwithlogin>
+    
+</app-menuwithlogin>
+
+<p-toast position="top-left" key="tl"></p-toast>
+<p-toast position="top-center" key="tc"></p-toast>
+<p-toast position="bottom-center" key="bc"></p-toast>
+<p-toast></p-toast>
+
+
+<p-card  [style]="{width: '80%', 'margin-left': '2em','margin-bottom': '2em','margin-top': '2em'}" styleClass="p-card-shadow">
+    <h3>Pesquisar Processos</h3>
+    <fieldset  style="border-style: none;">
+        <label for="email" class="block">CNJ</label>
+        <span>
+            <p-inputMask mask="9999999-99.9999.9.99.9999" [(ngModel)]="cnj" 
+              placeholder="">
+            </p-inputMask>
+        </span>
+    </fieldset>
+
+    <fieldset  style="border-style: none;">
+        <label for="type" class="block">Tipo do documento</label>
+        <span>
+            <p-inputMask mask="9" [(ngModel)]="type" 
+               placeholder="">
+            </p-inputMask>
+        </span>
+    </fieldset>
+
+    <fieldset  style="border-style: none;">
+        <p-button label="Search" icon="pi pi-search" [loading]="loading"
+        (click)="searchProcessCNJEtc(cnj,type)"
+        ></p-button>
+    </fieldset>
+
+   
+
+
+</p-card>
+
+
+<div class="grid" style="margin-left:'2em';margin-bottom:'10em'">
+    
+    <div class="col-12 md:col-12 lg:col-12" *ngIf="findInfoProcess">
+        <p-table #dt 
+            [value]="process" [(selection)]="selectedProcess" dataKey="id" 
+            styleClass="p-datatable-process" 
+            [rowHover]="true" [rows]="10" [showCurrentPageReport]="true" 
+            [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
+            [paginator]="true" 
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [filterDelay]="0" 
+            [globalFilterFields]="['processoID','vara','area','comarca_cnj','uf','segredo_justica','arquivado']">
+                    
+                    <ng-template pTemplate="caption">
+                        <div class="table-header">
+                            Lista de processos
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="dt.filterGlobal('$event.value', 'contains')" placeholder="Global Search" />
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="processoID">Id do Processo<p-sortIcon field="processoID"></p-sortIcon></th>
+                            <th pSortableColumn="vara">Vara<p-sortIcon field="vara"></p-sortIcon></th>
+                            <th pSortableColumn="area">Área<p-sortIcon field="area"></p-sortIcon></th>
+                            <th pSortableColumn="fonte_sistema">Fonte<p-sortIcon field="fonte_sistema"></p-sortIcon></th>
+                            <th pSortableColumn="uf">UF<p-sortIcon field="uf">Estado</p-sortIcon></th>
+                            <th pSortableColumn="distribuicaoData">Data da distribuição<p-sortIcon field="distribuicaoData"></p-sortIcon></th>
+                            <th pSortableColumn="segredo_justica">Segredo de Justiça <p-sortIcon field="segredo_justica"></p-sortIcon></th>
+                            <th pSortableColumn="arquivado">Arquivado <p-sortIcon field="arquivado"></p-sortIcon></th>
+                            <th pSortableColumn="activity">Anexos <p-sortIcon field="anexos"></p-sortIcon></th>
+                            
+                        </tr>
+    
+                    </ng-template>
+                    <ng-template pTemplate="body" let-process>
+                        <tr class="p-selectable-row">
+
+                            <td>
+                                <span class="p-column-title">ID do processo</span>
+                                {{process.processoID}}
+                            </td>
+
+                            <td>
+                                <span class="p-column-title">Vara</span>
+                                {{process.vara}}
+                            </td>
+                           
+                            <td>
+                                <span class="p-column-title">Área</span>
+                                {{process.area}}
+                            </td>
+                            <td>
+                                <span class="p-column-title">Fonte</span>
+                                <span class="image-text">{{process.fonte_sistema}}</span>
+                            </td>
+                            <td>
+                                <span class="p-column-title">Estado</span>
+                                <span class="image-text">{{process.uf}}</span>
+                            </td>
+                            <td>
+                                <span class="p-column-title">Data da distribuição</span>
+                                {{process.distribuicaoData}}
+                            </td>
+                            <td>
+                                <span class="p-column-title">Segredo de justiça</span>
+                                <span [class]="'process-badge segredo_justica-' + process.segredo_justica">{{process.segredo_justica==false?"Não":"Sim"}}</span>
+                            </td>
+
+                            <td>
+                                <span class="p-column-title">Arquivado</span>
+                                {{process.arquivado==false?"Não":"Sim"}}
+                            </td>
+
+                            <td>
+                                <span class="p-column-title">Anexos</span>
+                                <p-progressBar [value]="process.area" [showValue]="false"></p-progressBar>
+                            </td>
+                            <td style="text-align: center">
+                                <button pButton type="button" class="p-button-secondary" icon="pi pi-cog"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="8">Nenhum processo encontrado.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+    </div>
+</div>
+
+<div style="margin: 100px; padding: auto;"></div>
